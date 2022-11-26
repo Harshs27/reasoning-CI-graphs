@@ -1,0 +1,120 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1>Digester-Analytics</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 750px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"category": "unknown", "id": "Methanobacterium", "label": "Methanobacterium", "shape": "dot", "size": 10, "title": "Stage:unknown"}, {"category": "unknown", "id": "Methanobrevibacter", "label": "Methanobrevibacter", "shape": "dot", "size": 10, "title": "Stage:unknown"}, {"category": "unknown", "id": "Methanofastidiosales", "label": "Methanofastidiosales", "shape": "dot", "size": 10, "title": "Stage:unknown"}, {"category": "unknown", "id": "Methanolinea", "label": "Methanolinea", "shape": "dot", "size": 10, "title": "Stage:unknown"}, {"category": "unknown", "id": "Methanosarcina", "label": "Methanosarcina", "shape": "dot", "size": 10, "title": "Stage:unknown"}, {"category": "unknown", "id": "SCGC_AAA011-D5", "label": "SCGC_AAA011-D5", "shape": "dot", "size": 10, "title": "Stage:unknown"}, {"category": "unknown", "id": "CapacityPopulationEquivalents", "label": "CapacityPopulationEquivalents", "shape": "dot", "size": 10, "title": "Stage:unknown"}, {"category": "unknown", "id": "NbrOfSamples", "label": "NbrOfSamples", "shape": "dot", "size": 10, "title": "Stage:unknown"}, {"category": "unknown", "id": "TotalVolm3", "label": "TotalVolm3", "shape": "dot", "size": 10, "title": "Stage:unknown"}, {"category": "unknown", "id": "VS_pcTS", "label": "VS_pcTS", "shape": "dot", "size": 10, "title": "Stage:unknown"}, {"category": "unknown", "id": "Methanospirillum", "label": "Methanospirillum", "shape": "dot", "size": 10, "title": "Stage:unknown"}, {"category": "unknown", "id": "Alkalinity_mM", "label": "Alkalinity_mM", "shape": "dot", "size": 10, "title": "Stage:unknown"}, {"category": "unknown", "id": "NbrOfDigesters", "label": "NbrOfDigesters", "shape": "dot", "size": 10, "title": "Stage:unknown"}, {"category": "unknown", "id": "IndustrialLoad", "label": "IndustrialLoad", "shape": "dot", "size": 10, "title": "Stage:unknown"}]);
+        edges = new vis.DataSet([{"color": "red", "from": "Methanobacterium", "label": -2.52293, "title": "-2.52293", "to": "Methanobrevibacter", "value": 2.52293, "weight": -2.52293}, {"color": "red", "from": "Methanobacterium", "label": -0.8848, "title": "-0.8848", "to": "Methanofastidiosales", "value": 0.8848, "weight": -0.8848}, {"color": "green", "from": "Methanobacterium", "label": 0.59272, "title": "0.59272", "to": "Methanolinea", "value": 0.59272, "weight": 0.59272}, {"color": "red", "from": "Methanobacterium", "label": -0.44808, "title": "-0.44808", "to": "Methanosarcina", "value": 0.44808, "weight": -0.44808}, {"color": "green", "from": "Methanobacterium", "label": 0.32897, "title": "0.32897", "to": "SCGC_AAA011-D5", "value": 0.32897, "weight": 0.32897}, {"color": "green", "from": "Methanobacterium", "label": 0.34602, "title": "0.34602", "to": "CapacityPopulationEquivalents", "value": 0.34602, "weight": 0.34602}, {"color": "red", "from": "Methanobacterium", "label": -0.71681, "title": "-0.71681", "to": "NbrOfSamples", "value": 0.71681, "weight": -0.71681}, {"color": "red", "from": "Methanobacterium", "label": -0.45513, "title": "-0.45513", "to": "TotalVolm3", "value": 0.45513, "weight": -0.45513}, {"color": "red", "from": "Methanobacterium", "label": -0.60485, "title": "-0.60485", "to": "VS_pcTS", "value": 0.60485, "weight": -0.60485}, {"color": "red", "from": "Methanobrevibacter", "label": -0.32506, "title": "-0.32506", "to": "Methanofastidiosales", "value": 0.32506, "weight": -0.32506}, {"color": "red", "from": "Methanobrevibacter", "label": -0.42702, "title": "-0.42702", "to": "Methanolinea", "value": 0.42702, "weight": -0.42702}, {"color": "green", "from": "Methanobrevibacter", "label": 1.09727, "title": "1.09727", "to": "Methanospirillum", "value": 1.09727, "weight": 1.09727}, {"color": "green", "from": "Methanobrevibacter", "label": 1.49091, "title": "1.49091", "to": "Methanosarcina", "value": 1.49091, "weight": 1.49091}, {"color": "red", "from": "Methanobrevibacter", "label": -0.40019, "title": "-0.40019", "to": "Alkalinity_mM", "value": 0.40019, "weight": -0.40019}, {"color": "green", "from": "Methanobrevibacter", "label": 0.45318, "title": "0.45318", "to": "NbrOfDigesters", "value": 0.45318, "weight": 0.45318}, {"color": "green", "from": "Methanobrevibacter", "label": 0.4949, "title": "0.4949", "to": "NbrOfSamples", "value": 0.4949, "weight": 0.4949}, {"color": "green", "from": "Methanobrevibacter", "label": 0.46675, "title": "0.46675", "to": "TotalVolm3", "value": 0.46675, "weight": 0.46675}, {"color": "green", "from": "Methanobrevibacter", "label": 1.26328, "title": "1.26328", "to": "VS_pcTS", "value": 1.26328, "weight": 1.26328}, {"color": "red", "from": "Methanofastidiosales", "label": -1.17987, "title": "-1.17987", "to": "Methanolinea", "value": 1.17987, "weight": -1.17987}, {"color": "red", "from": "Methanofastidiosales", "label": -0.61516, "title": "-0.61516", "to": "Methanospirillum", "value": 0.61516, "weight": -0.61516}, {"color": "green", "from": "Methanofastidiosales", "label": 0.40698, "title": "0.40698", "to": "SCGC_AAA011-D5", "value": 0.40698, "weight": 0.40698}, {"color": "green", "from": "Methanofastidiosales", "label": 0.78843, "title": "0.78843", "to": "Alkalinity_mM", "value": 0.78843, "weight": 0.78843}, {"color": "red", "from": "Methanofastidiosales", "label": -0.29795, "title": "-0.29795", "to": "CapacityPopulationEquivalents", "value": 0.29795, "weight": -0.29795}, {"color": "green", "from": "Methanofastidiosales", "label": 0.64127, "title": "0.64127", "to": "NbrOfSamples", "value": 0.64127, "weight": 0.64127}, {"color": "green", "from": "Methanofastidiosales", "label": 0.87654, "title": "0.87654", "to": "TotalVolm3", "value": 0.87654, "weight": 0.87654}, {"color": "red", "from": "Methanofastidiosales", "label": -0.74127, "title": "-0.74127", "to": "VS_pcTS", "value": 0.74127, "weight": -0.74127}, {"color": "red", "from": "Methanolinea", "label": -0.56082, "title": "-0.56082", "to": "Methanospirillum", "value": 0.56082, "weight": -0.56082}, {"color": "green", "from": "Methanolinea", "label": 0.6312, "title": "0.6312", "to": "CapacityPopulationEquivalents", "value": 0.6312, "weight": 0.6312}, {"color": "red", "from": "Methanolinea", "label": -0.29239, "title": "-0.29239", "to": "NbrOfDigesters", "value": 0.29239, "weight": -0.29239}, {"color": "red", "from": "Methanolinea", "label": -0.72554, "title": "-0.72554", "to": "NbrOfSamples", "value": 0.72554, "weight": -0.72554}, {"color": "red", "from": "Methanolinea", "label": -1.35613, "title": "-1.35613", "to": "TotalVolm3", "value": 1.35613, "weight": -1.35613}, {"color": "red", "from": "Methanosarcina", "label": -2.16878, "title": "-2.16878", "to": "Alkalinity_mM", "value": 2.16878, "weight": -2.16878}, {"color": "green", "from": "Methanosarcina", "label": 3.04518, "title": "3.04518", "to": "VS_pcTS", "value": 3.04518, "weight": 3.04518}, {"color": "green", "from": "SCGC_AAA011-D5", "label": 1.10317, "title": "1.10317", "to": "Methanospirillum", "value": 1.10317, "weight": 1.10317}, {"color": "green", "from": "SCGC_AAA011-D5", "label": 1.43389, "title": "1.43389", "to": "Alkalinity_mM", "value": 1.43389, "weight": 1.43389}, {"color": "red", "from": "SCGC_AAA011-D5", "label": -0.43911, "title": "-0.43911", "to": "CapacityPopulationEquivalents", "value": 0.43911, "weight": -0.43911}, {"color": "green", "from": "SCGC_AAA011-D5", "label": 0.32953, "title": "0.32953", "to": "IndustrialLoad", "value": 0.32953, "weight": 0.32953}, {"color": "green", "from": "SCGC_AAA011-D5", "label": 0.39082, "title": "0.39082", "to": "NbrOfSamples", "value": 0.39082, "weight": 0.39082}, {"color": "green", "from": "SCGC_AAA011-D5", "label": 0.62239, "title": "0.62239", "to": "TotalVolm3", "value": 0.62239, "weight": 0.62239}, {"color": "red", "from": "SCGC_AAA011-D5", "label": -1.18013, "title": "-1.18013", "to": "VS_pcTS", "value": 1.18013, "weight": -1.18013}, {"color": "red", "from": "CapacityPopulationEquivalents", "label": -0.44632, "title": "-0.44632", "to": "Methanospirillum", "value": 0.44632, "weight": -0.44632}, {"color": "red", "from": "CapacityPopulationEquivalents", "label": -1.80922, "title": "-1.80922", "to": "Alkalinity_mM", "value": 1.80922, "weight": -1.80922}, {"color": "red", "from": "CapacityPopulationEquivalents", "label": -0.71782, "title": "-0.71782", "to": "IndustrialLoad", "value": 0.71782, "weight": -0.71782}, {"color": "red", "from": "CapacityPopulationEquivalents", "label": -1.29889, "title": "-1.29889", "to": "NbrOfDigesters", "value": 1.29889, "weight": -1.29889}, {"color": "red", "from": "CapacityPopulationEquivalents", "label": -2.26488, "title": "-2.26488", "to": "TotalVolm3", "value": 2.26488, "weight": -2.26488}, {"color": "green", "from": "CapacityPopulationEquivalents", "label": 1.12191, "title": "1.12191", "to": "VS_pcTS", "value": 1.12191, "weight": 1.12191}, {"color": "green", "from": "NbrOfSamples", "label": 0.39308, "title": "0.39308", "to": "Methanospirillum", "value": 0.39308, "weight": 0.39308}, {"color": "green", "from": "NbrOfSamples", "label": 0.58446, "title": "0.58446", "to": "Alkalinity_mM", "value": 0.58446, "weight": 0.58446}, {"color": "green", "from": "NbrOfSamples", "label": 0.74846, "title": "0.74846", "to": "TotalVolm3", "value": 0.74846, "weight": 0.74846}, {"color": "red", "from": "NbrOfSamples", "label": -0.48292, "title": "-0.48292", "to": "VS_pcTS", "value": 0.48292, "weight": -0.48292}, {"color": "green", "from": "TotalVolm3", "label": 1.53111, "title": "1.53111", "to": "Alkalinity_mM", "value": 1.53111, "weight": 1.53111}, {"color": "green", "from": "TotalVolm3", "label": 0.82757, "title": "0.82757", "to": "IndustrialLoad", "value": 0.82757, "weight": 0.82757}, {"color": "red)", "from": "TotalVolm3", "label": -0.98417, "title": "-0.98417", "to": "VS_pcTS", "value": 0.98417, "weight": -0.98417}, {"color": "red", "from": "VS_pcTS", "label": -0.86939, "title": "-0.86939", "to": "Methanospirillum", "value": 0.86939, "weight": -0.86939}, {"color": "red", "from": "VS_pcTS", "label": -5.0, "title": "-5.0", "to": "Alkalinity_mM", "value": 5.0, "weight": -5.0}, {"color": "red", "from": "VS_pcTS", "label": -0.53761, "title": "-0.53761", "to": "IndustrialLoad", "value": 0.53761, "weight": -0.53761}, {"color": "red", "from": "VS_pcTS", "label": -1.19335, "title": "-1.19335", "to": "NbrOfDigesters", "value": 1.19335, "weight": -1.19335}, {"color": "green", "from": "Methanospirillum", "label": 1.3745, "title": "1.3745", "to": "Alkalinity_mM", "value": 1.3745, "weight": 1.3745}, {"color": "green", "from": "Methanospirillum", "label": 0.73035, "title": "0.73035", "to": "NbrOfDigesters", "value": 0.73035, "weight": 0.73035}, {"color": "green", "from": "Alkalinity_mM", "label": 0.36911, "title": "0.36911", "to": "IndustrialLoad", "value": 0.36911, "weight": 0.36911}, {"color": "green", "from": "Alkalinity_mM", "label": 1.66769, "title": "1.66769", "to": "NbrOfDigesters", "value": 1.66769, "weight": 1.66769}, {"color": "green", "from": "NbrOfDigesters", "label": 0.30582, "title": "0.30582", "to": "IndustrialLoad", "value": 0.30582, "weight": 0.30582}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
