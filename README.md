@@ -13,4 +13,10 @@ Minimalist toy examples are given in `demo.ipynb`. It is a good entry point to u
 If you find our work useful, kindly cite the following associated papers:
 - `Algorithms for reasoning with Conditional Independence Graphs`: [arxiv](<>)
 
-- `Methods for Recovering Conditional Independence Graphs: A Survey`: [arxiv](<https://arxiv.org/abs/2211.06829>)
+- `Methods for Recovering Conditional Independence Graphs: A Survey`: [arxiv](<https://arxiv.org/abs/2211.06829>)  
+@article{shrivastava2022methods,  
+  title={Methods for Recovering Conditional Independence Graphs: A Survey},  
+  author={Shrivastava, Harsh and Chajewska, Urszula},  
+  journal={arXiv preprint arXiv:2211.06829},  
+  year={2022}  
+}  
